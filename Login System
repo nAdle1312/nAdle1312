@@ -1,0 +1,81 @@
+LOGIN SYSTEM
+REM Made by nAdle1312
+REM Save as LoginSystem.bat
+
+@echo off
+Title Login System
+Mode con: cols=50 lines=25
+color 8
+:Main
+cls
+echo.
+echo Witamy w login system
+echo.
+echo [Kliknij 1, aby - ] Stworzyc konto ! Milego dnia
+echo [Kliknij 2, aby - ] Zalowac sie ! Milego dnia
+echo.
+set /p choice=Wybierz numer: 
+if %choice% == 1 goto createacc
+if %choice% == 2 goto login
+echo.
+echo Invalid choice! Try again.
+echo.
+pause
+goto Main
+
+
+:createacc
+cls
+echo.
+echo Create your account!
+echo.
+set /p username=Stworz twoj nick: 
+set /p password=Stworz twoje haslo: 
+set /p name=Stworz twoja nazwe: 
+echo.
+echo Zapisywanie twoich danych...
+echo.
+timeout /t 2 >nul
+
+REM this will save the information to notepad, remove qoutes!
+echo set user=%username%>>"%username%".bat
+echo set pass=%password%>>"%username%".bat
+echo set name=%name%>>"%username%".bat
+echo.
+echo Konto zapisane! Milego :)
+echo.
+pause
+goto Main
+
+
+:login
+cls
+echo.
+echo You are about to login.
+echo.
+set /p loguser=Wpisz twoj nick: 
+echo.
+echo Prosze czekac podczas wyszukiwania...
+timeout /t 2 >nul
+if exist "%loguser%".bat goto typepass
+echo.
+echo Sprobuj ponownie, mamy problem ze znalezieniem Twojego konta.
+pause
+goto login
+:typepass
+call "%loguser%.bat"
+set /p logpass=Wpisz swoje haslo: 
+if "%logpass%"=="%pass%" goto success
+echo.
+echo Nieprawidlowe haslo. Sprobuj ponownie!
+pause
+goto typepass
+
+:success
+cls
+echo.
+echo Sukces! Zalogowales sie! %name%
+pause
+goto Main
+pause >nul
+REM Made by nAdle1312
